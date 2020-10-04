@@ -64,6 +64,11 @@
             <artifactId>github-branch-source</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>git-client</artifactId>
+            <version>3.5.1</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>

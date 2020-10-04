@@ -3,14 +3,14 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/symbol-annotation/1.20/symbol-annotation-1.20.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/scm-api/2.6.4/scm-api-2.6.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/github-api/1.116/github-api-1.116.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/jackson2-api/2.10.2/jackson2-api-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.10.2/jackson-databind-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.10.2/jackson-annotations-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.2/jackson-datatype-jsr310-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.2/jackson-datatype-jdk8-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/module/jackson-module-parameter-names/2.10.2/jackson-module-parameter-names-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.10.2/jackson-core-2.10.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.10.2/jackson-module-jaxb-annotations-2.10.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/jackson2-api/2.11.0/jackson2-api-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.11.0/jackson-databind-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.11.0/jackson-annotations-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.0/jackson-datatype-jsr310-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.0/jackson-datatype-jdk8-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.0/jackson-module-parameter-names-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.11.0/jackson-module-jaxb-annotations-2.11.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/jenkins/plugins/okhttp-api/3.14.9/okhttp-api-3.14.9.jar" enabled="true" runInBatchMode="false"/>
@@ -21,39 +21,26 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/squareup/okhttp/okhttp-urlconnection/2.7.5/okhttp-urlconnection-2.7.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/squareup/okhttp/okhttp/2.7.5/okhttp-2.7.5.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/git/3.6.0/git-3.6.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/joda-time/joda-time/2.9.5/joda-time-2.9.5.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/annotation-indexer/1.12/annotation-indexer-1.12.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/infradna/tool/bridge-method-annotation/1.17/bridge-method-annotation-1.17.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/git-client/3.2.1/git-client-3.2.1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit/5.6.1.202002131546-r/org.eclipse.jgit-5.6.1.202002131546-r.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/googlecode/javaewah/JavaEWAH/1.1.6/JavaEWAH-1.1.6.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/bouncycastle/bcpg-jdk15on/1.64/bcpg-jdk15on-1.64.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/bouncycastle/bcpkix-jdk15on/1.64/bcpkix-jdk15on-1.64.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.http.server/5.6.1.202002131546-r/org.eclipse.jgit.http.server-5.6.1.202002131546-r.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.http.apache/5.6.1.202002131546-r/org.eclipse.jgit.http.apache-5.6.1.202002131546-r.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.lfs/5.6.1.202002131546-r/org.eclipse.jgit.lfs-5.6.1.202002131546-r.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/jsch/0.1.55.2/jsch-0.1.55.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/jcraft/jsch/0.1.55/jsch-0.1.55.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/credentials/2.3.9/credentials-2.3.9.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/git/4.4.4/git-4.4.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/credentials/2.3.12/credentials-2.3.12.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/antlr/antlr4-runtime/4.5/antlr4-runtime-4.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/abego/treelayout/org.abego.treelayout.core/1.0.1/org.abego.treelayout.core-1.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/ssh-credentials/1.18.1/ssh-credentials-1.18.1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/trilead-api/1.0.8/trilead-api-1.0.8.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/trilead-ssh2/build-217-jenkins-21/trilead-ssh2-build-217-jenkins-21.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/trilead-putty-extension/1.2/trilead-putty-extension-1.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/script-security/1.74/script-security-1.74.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/groovy-sandbox/1.26/groovy-sandbox-1.26.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/github/ben-manes/caffeine/caffeine/2.8.2/caffeine-2.8.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/checkerframework/checker-qual/3.3.0/checker-qual-3.3.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/workflow/workflow-step-api/2.22/workflow-step-api-2.22.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/workflow/workflow-scm-step/2.11/workflow-scm-step-2.11.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/matrix-project/1.14/matrix-project-1.14.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/junit/1.29/junit-1.29.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/mailer/1.32/mailer-1.32.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/display-url-api/2.3.2/display-url-api-2.3.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/display-url-api/2.3.3/display-url-api-2.3.3.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/commons-validator/commons-validator/1.7/commons-validator-1.7.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/branch-api/2.6.0/branch-api-2.6.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/cloudbees-folder/6.14/cloudbees-folder-6.14.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/github-branch-source/2.9.0/github-branch-source-2.9.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/coravy/hudson/plugins/github/github/1.31.0/github-1.31.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/plain-credentials/1.6/plain-credentials-1.6.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/plain-credentials/1.7/plain-credentials-1.7.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/token-macro/2.12/token-macro-2.12.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/parboiled/parboiled-java/1.1.8/parboiled-java-1.1.8.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/parboiled/parboiled-core/1.1.8/parboiled-core-1.1.8.jar" enabled="true" runInBatchMode="false"/>
@@ -66,13 +53,19 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/io/jsonwebtoken/jjwt-api/0.11.2/jjwt-api-0.11.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/jsonwebtoken/jjwt-impl/0.11.2/jjwt-impl-0.11.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/jsonwebtoken/jjwt-jackson/0.11.2/jjwt-jackson-0.11.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/workflow/workflow-step-api/2.22/workflow-step-api-2.22.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/workflow/workflow-api/2.40/workflow-api-2.40.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/script-security/1.73/script-security-1.73.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/groovy-sandbox/1.26/groovy-sandbox-1.26.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/github/ben-manes/caffeine/caffeine/2.8.2/caffeine-2.8.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/checkerframework/checker-qual/3.3.0/checker-qual-3.3.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/git-client/3.5.1/git-client-3.5.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/trilead-api/1.0.8/trilead-api-1.0.8.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/trilead-ssh2/build-217-jenkins-21/trilead-ssh2-build-217-jenkins-21.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/trilead-putty-extension/1.2/trilead-putty-extension-1.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit/5.9.0.202009080501-r/org.eclipse.jgit-5.9.0.202009080501-r.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/googlecode/javaewah/JavaEWAH/1.1.7/JavaEWAH-1.1.7.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.http.server/5.9.0.202009080501-r/org.eclipse.jgit.http.server-5.9.0.202009080501-r.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.http.apache/5.9.0.202009080501-r/org.eclipse.jgit.http.apache-5.9.0.202009080501-r.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.lfs/5.9.0.202009080501-r/org.eclipse.jgit.lfs-5.9.0.202009080501-r.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/jgit/org.eclipse.jgit.ssh.jsch/5.9.0.202009080501-r/org.eclipse.jgit.ssh.jsch-5.9.0.202009080501-r.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/jsch/0.1.55.2/jsch-0.1.55.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/jcraft/jsch/0.1.55/jsch-0.1.55.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/apache-httpcomponents-client-4-api/4.5.10-2.0/apache-httpcomponents-client-4-api-4.5.10-2.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpclient/4.5.10/httpclient-4.5.10.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpcore/4.4.12/httpcore-4.4.12.jar" enabled="true" runInBatchMode="false"/>
@@ -82,6 +75,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpasyncclient/4.1.4/httpasyncclient-4.1.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpcore-nio/4.4.10/httpcore-nio-4.4.10.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpasyncclient-cache/4.1.4/httpasyncclient-cache-4.1.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/workflow/workflow-api/2.40/workflow-api-2.40.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/main/jenkins-core/2.235.1/jenkins-core-2.235.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/plugins/icon-shim/icon-set/1.0.5/icon-set-1.0.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/main/remoting/4.3/remoting-4.3.jar" enabled="true" runInBatchMode="false"/>
@@ -120,10 +114,12 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/stapler/stapler-adjunct-timeline/1.5/stapler-adjunct-timeline-1.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/stapler/stapler-adjunct-codemirror/1.3/stapler-adjunct-codemirror-1.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/jenkins/stapler/jenkins-stapler-support/1.1/jenkins-stapler-support-1.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/infradna/tool/bridge-method-annotation/1.13/bridge-method-annotation-1.13.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/stapler/json-lib/2.4-jenkins-2/json-lib-2.4-jenkins-2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/commons-httpclient/commons-httpclient/3.1-jenkins-1/commons-httpclient-3.1-jenkins-1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/args4j/args4j/2.33/args4j-2.33.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/annotation-indexer/1.12/annotation-indexer-1.12.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/bytecode-compatibility-transformer/2.0-beta-2/bytecode-compatibility-transformer-2.0-beta-2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/kohsuke/asm6/6.2/asm6-6.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jenkins-ci/constant-pool-scanner/1.2/constant-pool-scanner-1.2.jar" enabled="true" runInBatchMode="false"/>
