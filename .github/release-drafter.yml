@@ -1,0 +1,2 @@
+_extends: .github
+tag-template: github-branch-pr-change-filter-$NEXT_MINOR_VERSION
