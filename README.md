@@ -10,6 +10,8 @@
 
 When using a GitHub branch source, this trait allows you to filter discovered pull requests by including only those that match a provided regex.
 
+![Screenshot of Plugin In Action](media/screenshot_01.png)
+
 ## Getting started
 
 Add a discovery trait a provide a valid regex to match against full file names. If any files in a PR matched the provided regex, the discovered pull request will be included.

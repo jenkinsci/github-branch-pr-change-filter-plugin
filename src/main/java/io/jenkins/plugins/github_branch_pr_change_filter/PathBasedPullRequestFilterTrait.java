@@ -62,7 +62,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   /**
    * The regex for filtering pull request files changed.
    */
-  private final String regex;
+  private String regex = DEFAULT_MATCH_ALL_REGEX;
 
   /**
    * The pattern compiled from supplied regex
@@ -180,14 +180,14 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
       FormValidation formValidation;
       try {
         if (value.trim().isEmpty()) {
-          formValidation = FormValidation.error("Cannot have empty or blank regex.");
+          formValidation = FormValidation.error("Cannot empty regex.");
         } else {
           Pattern.compile(value);
           formValidation = FormValidation.ok();
         }
 
         if (DEFAULT_MATCH_ALL_REGEX.equals(value)) {
-          formValidation = FormValidation.warning("You should remove this trait instead of matching all paths");
+          formValidation = FormValidation.warning("This regex will match all files.");
         }
       } catch (PatternSyntaxException e) {
         formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
