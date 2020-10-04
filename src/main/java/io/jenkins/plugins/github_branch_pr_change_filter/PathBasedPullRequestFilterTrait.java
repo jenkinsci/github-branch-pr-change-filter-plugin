@@ -1,26 +1,3 @@
-/*
- * The MIT License
- *
- * Copyright (c) 2017, CloudBees, Inc.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 package io.jenkins.plugins.github_branch_pr_change_filter;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -60,20 +37,31 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   private static final String DEFAULT_MATCH_ALL_REGEX = ".*";
 
   /**
-   * The regex for filtering pull request files changed.
+   * The regex for including pull request files changed.
    */
-  private String regex = DEFAULT_MATCH_ALL_REGEX;
+  private String inclusionField = DEFAULT_MATCH_ALL_REGEX;
 
   /**
-   * The pattern compiled from supplied regex
+   * The regex for excluding pull request files changed.
    */
-  private transient Pattern pattern;
+  private String exclusionField;
 
   /**
-   * Getter used by Jenkins.
+   * The pattern compiled from supplied inclusion regex
    */
-  public String getRegex() {
-    return this.regex;
+  private transient Pattern inclusionPattern;
+
+  /**
+   * The pattern compiled from supplied exclusion regex
+   */
+  private transient Pattern exclusionPattern;
+
+  public String getInclusionField() {
+    return this.inclusionField;
+  }
+
+  public String getExclusionField() {
+    return this.inclusionField;
   }
 
   /**
@@ -82,9 +70,14 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
    * @param regex Path regex for filtering pull request files
    */
   @DataBoundConstructor
-  public PathBasedPullRequestFilterTrait(String regex) {
-    this.regex = regex;
-    pattern = Pattern.compile(regex);
+  public PathBasedPullRequestFilterTrait(String inclusionField, String exclusionField) {
+    // TODO Allow flags to change via checkboxes
+
+    this.inclusionField = inclusionField;
+    inclusionPattern = Pattern.compile(inclusionField, Pattern.CASE_INSENSITIVE);
+
+    this.exclusionField = exclusionField;
+    exclusionPattern = Pattern.compile(exclusionField, Pattern.CASE_INSENSITIVE);
   }
 
   /**
@@ -96,6 +89,31 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
     ctx.withFilter(getScmHeadFilter());
   }
 
+  private Boolean pathIsIncluded(String path) {
+    if(path == null){
+      return false;
+    }
+    else if (DEFAULT_MATCH_ALL_REGEX.equals(inclusionField) || inclusionField == null) {
+      return true;
+    }
+
+    return inclusionPattern.matcher(path).matches();
+  }
+
+  private Boolean pathIsNotExcluded(String path) {
+    if(path == null){
+      return true;
+    }
+    else if(exclusionField == null){
+      return true;
+    }
+    else if(DEFAULT_MATCH_ALL_REGEX.equals(exclusionField)) {
+      return false;
+    }
+
+    return !exclusionPattern.matcher(path).matches();
+  }
+
   private SCMHeadFilter getScmHeadFilter() {
     SCMHeadFilter scmHeadFilter = new SCMHeadFilter() {
 
@@ -103,24 +121,18 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
       public boolean isExcluded(@NonNull SCMSourceRequest request, @NonNull SCMHead head)
           throws IOException, InterruptedException {
         if (request instanceof GitHubSCMSourceRequest && head instanceof PullRequestSCMHead) {
-          GitHubSCMSourceRequest githubRequest = (GitHubSCMSourceRequest) request;
-          PullRequestSCMHead pullRequestSCMHead = (PullRequestSCMHead) head;
-          if (DEFAULT_MATCH_ALL_REGEX.equals(regex)) {
-            return false;
-          }
-
-          for (GHPullRequest ghPullRequest : githubRequest.getPullRequests()) {
-            if (ghPullRequest.getNumber() == pullRequestSCMHead.getNumber()) {
+          for (GHPullRequest ghPullRequest : ((GitHubSCMSourceRequest)request).getPullRequests()) {
+            if (ghPullRequest.getNumber() == ((PullRequestSCMHead) head).getNumber()) {
               for (GHPullRequestFileDetail fileDetail : ghPullRequest.listFiles()) {
                 String filename = fileDetail.getFilename();
-                String previousFilename = fileDetail.getFilename();
-                if (filename != null && pattern.matcher(filename).matches()) {
+                if (pathIsIncluded(filename) && pathIsNotExcluded(filename)) {
                   request.listener().getLogger().format("%n    Will Build PR %s. Found matching file : %s%n",
                       HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + ghPullRequest.getNumber()),
                       filename);
                   return false;
                 }
-                if (previousFilename != null && pattern.matcher(previousFilename).matches()) {
+                String previousFilename = fileDetail.getFilename();
+                if (pathIsIncluded(previousFilename) && pathIsNotExcluded(previousFilename)) {
                   request.listener().getLogger().format("%n    Will Build PR %s. Found matching (previous) file : %s%n",
                       HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + ghPullRequest.getNumber()),
                       fileDetail.getPreviousFilename());
@@ -163,7 +175,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends SCMSourceContext> getContextClass() {
+    public Class<? extends SCMSourceContext<?, ?>> getContextClass() {
       return GitHubSCMSourceContext.class;
     }
 
@@ -176,19 +188,34 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
     }
 
     @Restricted(NoExternalUse.class)
-    public FormValidation doCheckRegex(@QueryParameter String value) {
+    public FormValidation doCheckInclusionField(@QueryParameter String value) {
       FormValidation formValidation;
       try {
         if (value.trim().isEmpty()) {
-          formValidation = FormValidation.error("Cannot empty regex.");
+          formValidation = FormValidation.error("Must provide regex for inclusion.");
         } else {
           Pattern.compile(value);
           formValidation = FormValidation.ok();
         }
+      } catch (PatternSyntaxException e) {
+        formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
+      }
 
-        if (DEFAULT_MATCH_ALL_REGEX.equals(value)) {
-          formValidation = FormValidation.warning("This regex will match all files.");
+      return formValidation;
+    }
+
+    @Restricted(NoExternalUse.class)
+    public FormValidation doCheckExclusionField(@QueryParameter String value) {
+      FormValidation formValidation;
+      try {
+        if (!value.trim().isEmpty()) {
+          if(DEFAULT_MATCH_ALL_REGEX.equals(value)) {
+            return FormValidation.warning("All files will be excluded.");
+          } else {
+            Pattern.compile(value);
+          }
         }
+        formValidation = FormValidation.ok();
       } catch (PatternSyntaxException e) {
         formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
       }

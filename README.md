@@ -14,7 +14,8 @@ When using a GitHub branch source, this trait allows you to filter discovered pu
 
 ## Getting started
 
-Add a discovery trait a provide a valid regex to match against full file names. If any files in a PR matched the provided regex, the discovered pull request will be included.
+Add a discovery trait a provide a valid regex to match against full file names. If any files in a PR matched the provided regex, the discovered pull request will be included. You may also provide regex to exclude files that would otherwise be matched by the inclusion regex.  
+*Note: Regex matches are currently case-insensitive*
 
 ## Issues
 
