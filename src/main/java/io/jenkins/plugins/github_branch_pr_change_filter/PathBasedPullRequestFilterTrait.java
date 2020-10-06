@@ -67,7 +67,8 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   /**
    * Constructor for stapler.
    *
-   * @param regex Path regex for filtering pull request files
+   * @param inclusionField Path regex for which pull request files to include
+   * @param exclusionField Path regex for which pull request files to exclude
    */
   @DataBoundConstructor
   public PathBasedPullRequestFilterTrait(String inclusionField, String exclusionField) {
