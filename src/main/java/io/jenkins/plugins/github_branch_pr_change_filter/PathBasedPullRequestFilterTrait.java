@@ -50,12 +50,12 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   /**
    * The pattern compiled from supplied inclusion regex
    */
-  private transient Pattern inclusionPattern;
+  private Pattern inclusionPattern;
 
   /**
    * The pattern compiled from supplied exclusion regex
    */
-  private transient Pattern exclusionPattern;
+  private Pattern exclusionPattern;
 
   public String getInclusionField() {
     return this.inclusionField;
@@ -76,10 +76,10 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
     // TODO Allow flags to change via checkboxes
 
     this.inclusionField = inclusionField;
-    inclusionPattern = Pattern.compile(inclusionField, Pattern.CASE_INSENSITIVE);
+    this.inclusionPattern = Pattern.compile(inclusionField, Pattern.CASE_INSENSITIVE);
 
     this.exclusionField = exclusionField;
-    exclusionPattern = Pattern.compile(exclusionField, Pattern.CASE_INSENSITIVE);
+    this.exclusionPattern = Pattern.compile(exclusionField, Pattern.CASE_INSENSITIVE);
   }
 
   /**
