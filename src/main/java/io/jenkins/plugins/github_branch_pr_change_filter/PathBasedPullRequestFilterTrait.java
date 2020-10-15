@@ -6,6 +6,7 @@ import hudson.console.HyperlinkNote;
 import hudson.util.FormValidation;
 import java.io.IOException;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMHeadCategory;
@@ -91,28 +92,27 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   }
 
   private Boolean pathIsIncluded(String path) {
-    if(path == null){
+    if(path == null || path == ""){
       return false;
     }
-    else if (DEFAULT_MATCH_ALL_REGEX.equals(inclusionField) || inclusionField == null) {
+    else if (DEFAULT_MATCH_ALL_REGEX.equals(inclusionField) || inclusionField == null || inclusionPattern == null) {
       return true;
     }
 
-    return inclusionPattern.matcher(path).matches();
+    Matcher matcher = inclusionPattern.matcher(path);
+    return matcher != null ? matcher.matches() : false;
   }
 
   private Boolean pathIsNotExcluded(String path) {
-    if(path == null){
-      return true;
-    }
-    else if(exclusionField == null){
+    if(path == null || path == "" || exclusionField == null || exclusionPattern == null){
       return true;
     }
     else if(DEFAULT_MATCH_ALL_REGEX.equals(exclusionField)) {
       return false;
     }
 
-    return !exclusionPattern.matcher(path).matches();
+    Matcher matcher = exclusionPattern.matcher(path);
+    return matcher != null ? !matcher.matches() : true;
   }
 
   private SCMHeadFilter getScmHeadFilter() {
