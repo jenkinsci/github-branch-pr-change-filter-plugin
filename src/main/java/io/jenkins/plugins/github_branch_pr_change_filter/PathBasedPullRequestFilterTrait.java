@@ -40,7 +40,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   /**
    * The regex for including pull request files changed.
    */
-  private String inclusionField = DEFAULT_MATCH_ALL_REGEX;
+  private String inclusionField;
 
   /**
    * The regex for excluding pull request files changed.
@@ -50,12 +50,12 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   /**
    * The pattern compiled from supplied inclusion regex
    */
-  private Pattern inclusionPattern;
+  public Pattern inclusionPattern;
 
   /**
    * The pattern compiled from supplied exclusion regex
    */
-  private Pattern exclusionPattern;
+  public Pattern exclusionPattern;
 
   public String getInclusionField() {
     return this.inclusionField;
@@ -114,27 +114,31 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   }
 
   private SCMHeadFilter getScmHeadFilter() {
-    SCMHeadFilter scmHeadFilter = new SCMHeadFilter() {
-
+    return new SCMHeadFilter() {
       @Override
       public boolean isExcluded(@NonNull SCMSourceRequest request, @NonNull SCMHead head)
           throws IOException, InterruptedException {
         if (request instanceof GitHubSCMSourceRequest && head instanceof PullRequestSCMHead) {
+          if(inclusionPattern == null) {
+            request.listener().getLogger().format("Warning: No inclusion regex has been provided. All PRs will be included.");
+            return false;
+          }
           for (GHPullRequest ghPullRequest : ((GitHubSCMSourceRequest)request).getPullRequests()) {
-            if (ghPullRequest.getNumber() == ((PullRequestSCMHead) head).getNumber()) {
+            int prNumber = ghPullRequest.getNumber();
+            if (prNumber == ((PullRequestSCMHead) head).getNumber()) {
               for (GHPullRequestFileDetail fileDetail : ghPullRequest.listFiles()) {
                 String filename = fileDetail.getFilename();
                 if (pathIsIncluded(filename) && pathIsNotExcluded(filename)) {
                   request.listener().getLogger().format("%n    Will Build PR %s. Found matching file : %s%n",
-                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + ghPullRequest.getNumber()),
+                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + prNumber),
                       filename);
                   return false;
                 }
-                String previousFilename = fileDetail.getFilename();
+                String previousFilename = fileDetail.getPreviousFilename();
                 if (pathIsIncluded(previousFilename) && pathIsNotExcluded(previousFilename)) {
                   request.listener().getLogger().format("%n    Will Build PR %s. Found matching (previous) file : %s%n",
-                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + ghPullRequest.getNumber()),
-                      fileDetail.getPreviousFilename());
+                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + prNumber),
+                      previousFilename);
                   return false;
                 }
               }
@@ -146,8 +150,6 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
         return false;
       }
     };
-
-    return scmHeadFilter;
   }
 
   /**
