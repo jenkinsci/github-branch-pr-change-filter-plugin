@@ -99,8 +99,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
       return true;
     }
 
-    Matcher matcher = inclusionPattern.matcher(path);
-    return matcher != null ? matcher.matches() : false;
+    return inclusionPattern.matcher(path).matches();
   }
 
   private Boolean pathIsNotExcluded(String path) {
@@ -111,8 +110,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
       return false;
     }
 
-    Matcher matcher = exclusionPattern.matcher(path);
-    return matcher != null ? !matcher.matches() : true;
+    return !exclusionPattern.matcher(path).matches();
   }
 
   private SCMHeadFilter getScmHeadFilter() {
