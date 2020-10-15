@@ -61,7 +61,7 @@ public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
   }
 
   public String getExclusionField() {
-    return this.inclusionField;
+    return this.exclusionField;
   }
 
   /**
