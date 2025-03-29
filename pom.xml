@@ -18,7 +18,7 @@
         <jenkins.baseline>2.479</jenkins.baseline>
 
         <!-- Baseline Jenkins version you use to build the plugin. Users must have this version or newer to run. -->
-        <jenkins.version>${jenkins.baseline}.1</jenkins.version>
+        <jenkins.version>${jenkins.baseline}.3</jenkins.version>
     </properties>
     <name>GitHub Branch Source Pull Request Change Filter</name>
     <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
@@ -29,7 +29,7 @@
                 <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
                 <groupId>io.jenkins.tools.bom</groupId>
                 <artifactId>bom-${jenkins.baseline}.x</artifactId>
-                <version>4136.vca_c3202a_7fd1</version>
+                <version>4545.v56392b_7ca_7b_a_</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
