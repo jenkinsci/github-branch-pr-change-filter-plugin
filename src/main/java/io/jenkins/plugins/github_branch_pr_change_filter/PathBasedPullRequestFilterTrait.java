@@ -34,193 +34,209 @@ import org.kohsuke.stapler.QueryParameter;
  *
  */
 public class PathBasedPullRequestFilterTrait extends SCMSourceTrait {
-  private static final String DEFAULT_MATCH_ALL_REGEX = ".*";
+    private static final String DEFAULT_MATCH_ALL_REGEX = ".*";
 
-  /**
-   * The regex for including pull request files changed.
-   */
-  private String inclusionField;
+    /**
+     * The regex for including pull request files changed.
+     */
+    private String inclusionField;
 
-  /**
-   * The regex for excluding pull request files changed.
-   */
-  private String exclusionField;
+    /**
+     * The regex for excluding pull request files changed.
+     */
+    private String exclusionField;
 
-  /**
-   * The pattern compiled from supplied inclusion regex
-   */
-  public Pattern inclusionPattern;
+    /**
+     * The pattern compiled from supplied inclusion regex
+     */
+    public Pattern inclusionPattern;
 
-  /**
-   * The pattern compiled from supplied exclusion regex
-   */
-  public Pattern exclusionPattern;
+    /**
+     * The pattern compiled from supplied exclusion regex
+     */
+    public Pattern exclusionPattern;
 
-  public String getInclusionField() {
-    return this.inclusionField;
-  }
-
-  public String getExclusionField() {
-    return this.exclusionField;
-  }
-
-  /**
-   * Constructor for stapler.
-   *
-   * @param inclusionField Path regex for which pull request files to include
-   * @param exclusionField Path regex for which pull request files to exclude
-   */
-  @DataBoundConstructor
-  public PathBasedPullRequestFilterTrait(String inclusionField, String exclusionField) {
-    // TODO Allow flags to change via checkboxes
-
-    this.inclusionField = inclusionField;
-    this.inclusionPattern = Pattern.compile(inclusionField, Pattern.CASE_INSENSITIVE);
-
-    this.exclusionField = exclusionField;
-    this.exclusionPattern = Pattern.compile(exclusionField, Pattern.CASE_INSENSITIVE);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void decorateContext(SCMSourceContext<?, ?> context) {
-    GitHubSCMSourceContext ctx = (GitHubSCMSourceContext) context;
-    ctx.withFilter(getScmHeadFilter());
-  }
-
-  private Boolean pathIsIncluded(String path) {
-    if(path == null || path == ""){
-      return false;
-    }
-    else if (DEFAULT_MATCH_ALL_REGEX.equals(inclusionField) || inclusionField == null || inclusionPattern == null) {
-      return true;
+    public String getInclusionField() {
+        return this.inclusionField;
     }
 
-    return inclusionPattern.matcher(path).matches();
-  }
-
-  private Boolean pathIsNotExcluded(String path) {
-    if(path == null || path == "" || exclusionField == null || exclusionPattern == null){
-      return true;
-    }
-    else if(DEFAULT_MATCH_ALL_REGEX.equals(exclusionField)) {
-      return false;
+    public String getExclusionField() {
+        return this.exclusionField;
     }
 
-    return !exclusionPattern.matcher(path).matches();
-  }
+    /**
+     * Constructor for stapler.
+     *
+     * @param inclusionField Path regex for which pull request files to include
+     * @param exclusionField Path regex for which pull request files to exclude
+     */
+    @DataBoundConstructor
+    public PathBasedPullRequestFilterTrait(String inclusionField, String exclusionField) {
+        // TODO Allow flags to change via checkboxes
 
-  private SCMHeadFilter getScmHeadFilter() {
-    return new SCMHeadFilter() {
-      @Override
-      public boolean isExcluded(@NonNull SCMSourceRequest request, @NonNull SCMHead head)
-          throws IOException, InterruptedException {
-        if (request instanceof GitHubSCMSourceRequest && head instanceof PullRequestSCMHead) {
-          if(inclusionPattern == null) {
-            request.listener().getLogger().format("Warning: No inclusion regex has been provided. All PRs will be included.");
+        this.inclusionField = inclusionField;
+        this.inclusionPattern = Pattern.compile(inclusionField, Pattern.CASE_INSENSITIVE);
+
+        this.exclusionField = exclusionField;
+        this.exclusionPattern = Pattern.compile(exclusionField, Pattern.CASE_INSENSITIVE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void decorateContext(SCMSourceContext<?, ?> context) {
+        GitHubSCMSourceContext ctx = (GitHubSCMSourceContext) context;
+        ctx.withFilter(getScmHeadFilter());
+    }
+
+    private Boolean pathIsIncluded(String path) {
+        if (path == null || path == "") {
             return false;
-          }
-          for (GHPullRequest ghPullRequest : ((GitHubSCMSourceRequest)request).getPullRequests()) {
-            int prNumber = ghPullRequest.getNumber();
-            if (prNumber == ((PullRequestSCMHead) head).getNumber()) {
-              for (GHPullRequestFileDetail fileDetail : ghPullRequest.listFiles()) {
-                String filename = fileDetail.getFilename();
-                if (pathIsIncluded(filename) && pathIsNotExcluded(filename)) {
-                  request.listener().getLogger().format("%n    Will Build PR %s. Found matching file : %s%n",
-                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + prNumber),
-                      filename);
-                  return false;
+        } else if (DEFAULT_MATCH_ALL_REGEX.equals(inclusionField)
+                || inclusionField == null
+                || inclusionPattern == null) {
+            return true;
+        }
+
+        return inclusionPattern.matcher(path).matches();
+    }
+
+    private Boolean pathIsNotExcluded(String path) {
+        if (path == null || path == "" || exclusionField == null || exclusionPattern == null) {
+            return true;
+        } else if (DEFAULT_MATCH_ALL_REGEX.equals(exclusionField)) {
+            return false;
+        }
+
+        return !exclusionPattern.matcher(path).matches();
+    }
+
+    private SCMHeadFilter getScmHeadFilter() {
+        return new SCMHeadFilter() {
+            @Override
+            public boolean isExcluded(@NonNull SCMSourceRequest request, @NonNull SCMHead head)
+                    throws IOException, InterruptedException {
+                if (request instanceof GitHubSCMSourceRequest && head instanceof PullRequestSCMHead) {
+                    if (inclusionPattern == null) {
+                        request.listener()
+                                .getLogger()
+                                .format("Warning: No inclusion regex has been provided. All PRs will be included.");
+                        return false;
+                    }
+                    for (GHPullRequest ghPullRequest : ((GitHubSCMSourceRequest) request).getPullRequests()) {
+                        int prNumber = ghPullRequest.getNumber();
+                        if (prNumber == ((PullRequestSCMHead) head).getNumber()) {
+                            for (GHPullRequestFileDetail fileDetail : ghPullRequest.listFiles()) {
+                                String filename = fileDetail.getFilename();
+                                if (pathIsIncluded(filename) && pathIsNotExcluded(filename)) {
+                                    request.listener()
+                                            .getLogger()
+                                            .format(
+                                                    "%n    Will Build PR %s. Found matching file : %s%n",
+                                                    HyperlinkNote.encodeTo(
+                                                            ghPullRequest
+                                                                    .getHtmlUrl()
+                                                                    .toString(),
+                                                            "#" + prNumber),
+                                                    filename);
+                                    return false;
+                                }
+                                String previousFilename = fileDetail.getPreviousFilename();
+                                if (pathIsIncluded(previousFilename) && pathIsNotExcluded(previousFilename)) {
+                                    request.listener()
+                                            .getLogger()
+                                            .format(
+                                                    "%n    Will Build PR %s. Found matching (previous) file : %s%n",
+                                                    HyperlinkNote.encodeTo(
+                                                            ghPullRequest
+                                                                    .getHtmlUrl()
+                                                                    .toString(),
+                                                            "#" + prNumber),
+                                                    previousFilename);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    return true;
                 }
-                String previousFilename = fileDetail.getPreviousFilename();
-                if (pathIsIncluded(previousFilename) && pathIsNotExcluded(previousFilename)) {
-                  request.listener().getLogger().format("%n    Will Build PR %s. Found matching (previous) file : %s%n",
-                      HyperlinkNote.encodeTo(ghPullRequest.getHtmlUrl().toString(), "#" + prNumber),
-                      previousFilename);
-                  return false;
-                }
-              }
+
+                return false;
             }
-          }
-          return true;
-        }
-
-        return false;
-      }
-    };
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean includeCategory(@NonNull SCMHeadCategory category) {
-    return category instanceof ChangeRequestSCMHeadCategory;
-  }
-
-  @Extension
-  @Discovery
-  public static class DescriptorImpl extends SCMSourceTraitDescriptor {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDisplayName() {
-      return "Include discovered GitHub pull requests by changed files via regex";
+        };
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends SCMSourceContext<?, ?>> getContextClass() {
-      return GitHubSCMSourceContext.class;
+    public boolean includeCategory(@NonNull SCMHeadCategory category) {
+        return category instanceof ChangeRequestSCMHeadCategory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Class<? extends SCMSource> getSourceClass() {
-      return GitHubSCMSource.class;
-    }
+    @Extension
+    @Discovery
+    public static class DescriptorImpl extends SCMSourceTraitDescriptor {
 
-    @Restricted(NoExternalUse.class)
-    public FormValidation doCheckInclusionField(@QueryParameter String value) {
-      FormValidation formValidation;
-      try {
-        if (value.trim().isEmpty()) {
-          formValidation = FormValidation.error("Must provide regex for inclusion.");
-        } else {
-          Pattern.compile(value);
-          formValidation = FormValidation.ok();
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDisplayName() {
+            return "Include discovered GitHub pull requests by changed files via regex";
         }
-      } catch (PatternSyntaxException e) {
-        formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
-      }
 
-      return formValidation;
-    }
-
-    @Restricted(NoExternalUse.class)
-    public FormValidation doCheckExclusionField(@QueryParameter String value) {
-      FormValidation formValidation;
-      try {
-        if (!value.trim().isEmpty()) {
-          if(DEFAULT_MATCH_ALL_REGEX.equals(value)) {
-            return FormValidation.warning("All files will be excluded.");
-          } else {
-            Pattern.compile(value);
-          }
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Class<? extends SCMSourceContext<?, ?>> getContextClass() {
+            return GitHubSCMSourceContext.class;
         }
-        formValidation = FormValidation.ok();
-      } catch (PatternSyntaxException e) {
-        formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
-      }
 
-      return formValidation;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Class<? extends SCMSource> getSourceClass() {
+            return GitHubSCMSource.class;
+        }
+
+        @Restricted(NoExternalUse.class)
+        public FormValidation doCheckInclusionField(@QueryParameter String value) {
+            FormValidation formValidation;
+            try {
+                if (value.trim().isEmpty()) {
+                    formValidation = FormValidation.error("Must provide regex for inclusion.");
+                } else {
+                    Pattern.compile(value);
+                    formValidation = FormValidation.ok();
+                }
+            } catch (PatternSyntaxException e) {
+                formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
+            }
+
+            return formValidation;
+        }
+
+        @Restricted(NoExternalUse.class)
+        public FormValidation doCheckExclusionField(@QueryParameter String value) {
+            FormValidation formValidation;
+            try {
+                if (!value.trim().isEmpty()) {
+                    if (DEFAULT_MATCH_ALL_REGEX.equals(value)) {
+                        return FormValidation.warning("All files will be excluded.");
+                    } else {
+                        Pattern.compile(value);
+                    }
+                }
+                formValidation = FormValidation.ok();
+            } catch (PatternSyntaxException e) {
+                formValidation = FormValidation.error("Invalid Regex : " + e.getMessage());
+            }
+
+            return formValidation;
+        }
     }
-  }
 }
