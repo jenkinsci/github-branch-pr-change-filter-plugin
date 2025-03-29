@@ -6,7 +6,6 @@ import hudson.console.HyperlinkNote;
 import hudson.util.FormValidation;
 import java.io.IOException;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMHeadCategory;
